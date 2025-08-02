@@ -1,30 +1,11 @@
-import * as React from 'react';
+import { createSignal, onCleanup } from "solid-js";
+import html from "solid-js/html";
 
-const Options: React.FC = () => {
-  return (
-    <div>
-      <form>
-        <p>
-          <label htmlFor="username">Your Name</label>
-          <br />
-          <input
-            type="text"
-            id="username"
-            name="username"
-            spellCheck="false"
-            autoComplete="off"
-            required
-          />
-        </p>
-        <p>
-          <label htmlFor="logging">
-            <input type="checkbox" name="logging" /> Show the features enabled
-            on each page in the console
-          </label>
-        </p>
-      </form>
-    </div>
-  );
+const Options = () => {
+  const [count, setCount] = createSignal(0),
+    timer = setInterval(() => setCount(count() + 1), 1000);
+  onCleanup(() => clearInterval(timer));
+  return html`<div>${count}</div>`;
 };
 
 export default Options;

@@ -1,53 +1,11 @@
-import * as React from 'react';
-import browser, {Tabs} from "webextension-polyfill";
+import { createSignal, onCleanup } from "solid-js";
+import html from "solid-js/html";
 
-function openWebPage(url: string): Promise<Tabs.Tab> {
-  return browser.tabs.create({url});
-}
-
-const Popup: React.FC = () => {
-  return (
-    <section id="popup">
-      <h2>WEB-EXTENSION-STARTER</h2>
-      <button
-        id="options__button"
-        type="button"
-        onClick={(): Promise<Tabs.Tab> => {
-          return openWebPage('/Options/options.html');
-        }}
-      >
-        Options Page
-      </button>
-      <div className="links__holder">
-        <ul>
-          <li>
-            <button
-              type="button"
-              onClick={(): Promise<Tabs.Tab> => {
-                return openWebPage(
-                  'https://github.com/abhijithvijayan/web-extension-starter'
-                );
-              }}
-            >
-              GitHub
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              onClick={(): Promise<Tabs.Tab> => {
-                return openWebPage(
-                  'https://www.buymeacoffee.com/abhijithvijayan'
-                );
-              }}
-            >
-              Buy Me A Coffee
-            </button>
-          </li>
-        </ul>
-      </div>
-    </section>
-  );
+const Popup = () => {
+  const [count, setCount] = createSignal(0),
+    timer = setInterval(() => setCount(count() + 1), 1000);
+  onCleanup(() => clearInterval(timer));
+  return html`<div>${count}</div>`;
 };
 
-export default Popup;
+export default Popup

@@ -5,6 +5,7 @@ import process from "node:process";
 import zipPack from "vite-plugin-zip-pack";
 import checker from 'vite-plugin-checker';
 import clean from 'vite-plugin-clean';
+import solid from 'vite-plugin-solid';
 import WextManifest from "vite-plugin-wext-manifest";
 
 export default defineConfig(({ mode }) => {
@@ -49,7 +50,7 @@ export default defineConfig(({ mode }) => {
         },
 
         plugins: [
-            react(),
+            solid(),
 
             // delete previous built compressed file
             clean({
