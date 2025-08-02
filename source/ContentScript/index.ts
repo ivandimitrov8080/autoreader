@@ -1,3 +1,10 @@
 console.log('helloworld from content script');
+const websites = [
+  "*.wikipedia.org/wiki/*",
+];
 
-export {};
+for (const w of websites) {
+  console.log(w)
+}
+
+export { };
