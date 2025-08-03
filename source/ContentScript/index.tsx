@@ -1,4 +1,5 @@
-import { Readability } from "@mozilla/readability";
+import { render } from 'solid-js/web';
+import Content from './Content';
 
 console.log('helloworld from content script');
 const websites = [
@@ -10,8 +11,7 @@ for (const w of websites) {
 }
 
 window.addEventListener('load', function() {
-  var article = new Readability(window.document).parse();
-  document.body.innerHTML = article?.content ?? ''
+  render(Content, document.body)
 })
 
 export { };
